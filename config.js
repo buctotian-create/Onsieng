@@ -1,6 +1,6 @@
 // Public Supabase project settings. Never use a service-role key here.
-export const SUPABASE_URL = 'https://torfsmaurrzupxxqhhfw.supabase.co';
-export const SUPABASE_ANON_KEY = 'sb_publishable_8stxAYS2c0yZSF0A0gUb4Q_GV5Abu3P';
+export const SUPABASE_URL = 'https://ijygdrungbzlbriboyta.supabase.co';
+export const SUPABASE_ANON_KEY = 'sb_publishable_Hpg2o1CXHTTbLkflqHQeHg_KJcSAA6I';
 
 // Public contact details shown in the sidebar. Leave blank until available.
 export const CONTACT_FACEBOOK_URL = 'https://www.facebook.com/iancbuctotjr/';
