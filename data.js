@@ -1,10 +1,16 @@
 export const images = {
- chair: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=600&q=80',
+ chair: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=600&q=80',
  lamp: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80',
  vase: 'https://images.unsplash.com/photo-1578500494198-246f612d3b3d?auto=format&fit=crop&w=600&q=80',
  table: 'https://images.unsplash.com/photo-1499933374294-4584851497cc?auto=format&fit=crop&w=600&q=80',
  shelf: 'https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=600&q=80',
  sofa: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80',
+ dining: 'https://images.unsplash.com/photo-1598300056393-4aac492f4344?auto=format&fit=crop&w=600&q=80',
+ mirror: 'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=600&q=80',
+ pendant: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=600&q=80',
+ cushion: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=600&q=80',
+ planter: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80',
+ basket: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=600&q=80',
 };
 export const seedProducts = [
  {id:'p1', code:'ONS-001', name:'Luna Lounge Chair', category:'Furniture', price:4850, stock:24, image:images.chair, description:'A little more comfort for your everyday.', location:'A-01'},
@@ -13,6 +19,12 @@ export const seedProducts = [
  {id:'p4', code:'ONS-004', name:'Oak Side Table', category:'Furniture', price:3290, stock:15, image:images.table, description:'Thoughtfully made for the spaces you love.', location:'A-05'},
  {id:'p5', code:'ONS-005', name:'Haven Wall Shelf', category:'Home decor', price:2150, stock:5, image:images.shelf, description:'A beautiful home for your favorite things.', location:'C-08'},
  {id:'p6', code:'ONS-006', name:'Nora Two-Seater Sofa', category:'Furniture', price:12900, stock:12, image:images.sofa, description:'Settle in and make yourself at home.', location:'A-09'},
+ {id:'p7', code:'ONS-007', name:'Mira Dining Chair', category:'Furniture', price:2890, stock:18, image:images.dining, description:'A comfortable seat for everyday gatherings.', location:'A-11'},
+ {id:'p8', code:'ONS-008', name:'Elio Wall Mirror', category:'Home decor', price:2450, stock:16, image:images.mirror, description:'Bring a little more light into your space.', location:'C-11'},
+ {id:'p9', code:'ONS-009', name:'Sora Pendant Light', category:'Lighting', price:3690, stock:11, image:images.pendant, description:'Soft light with a sculptural touch.', location:'B-06'},
+ {id:'p10', code:'ONS-010', name:'Sunday Cushion', category:'Soft furnishings', price:690, stock:35, image:images.cushion, description:'An easy layer of everyday comfort.', location:'D-01'},
+ {id:'p11', code:'ONS-011', name:'Terra Plant Pot', category:'Home decor', price:780, stock:28, image:images.planter, description:'A natural home for your favorite greens.', location:'C-13'},
+ {id:'p12', code:'ONS-012', name:'Eden Accent Stool', category:'Furniture', price:1290, stock:20, image:images.basket, description:'A versatile extra seat for any room.', location:'D-04'},
 ];
 export const seedOrders = [
  {id:'1048', customer:'Isabella Santos', email:'isabella@example.com', address:'Quezon City, Metro Manila', items:[{id:'p1',name:'Luna Lounge Chair',price:4850,quantity:1}], total:4850, status:'Pending', payment:'Cash on delivery', payment_verified:false, assigned_to:'', created_at:'2026-11-14T09:15:00Z'},
