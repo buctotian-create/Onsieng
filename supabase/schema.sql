@@ -73,7 +73,8 @@ begin
   if auth.uid() is null then raise exception 'Please sign in to place an order'; end if;
   if nullif(trim(p_customer),'') is null or nullif(trim(p_email),'') is null or nullif(trim(p_address),'') is null then raise exception 'Delivery details are required'; end if;
   if p_payment not in ('Cash on delivery','Bank transfer') then raise exception 'Invalid payment method'; end if;
-  if jsonb_typeof(p_items) <> 'array' or jsonb_array_length(p_items) = 0 then raise exception 'Your cart is empty'; end if;
+  if p_items is null or jsonb_typeof(p_items) is distinct from 'array' then raise exception 'Your cart must be a nonempty array'; end if;
+  if jsonb_array_length(p_items) = 0 then raise exception 'Your cart is empty'; end if;
   if (select count(*) <> count(distinct value->>'id') from jsonb_array_elements(p_items)) then raise exception 'Duplicate products in cart'; end if;
   for item in select value from jsonb_array_elements(p_items) order by value->>'id' loop
     qty := (item->>'quantity')::integer;
@@ -91,7 +92,7 @@ revoke all on function public.place_order(text,text,text,text,jsonb) from public
 grant execute on function public.place_order(text,text,text,text,jsonb) to authenticated;
 
 insert into public.products (id,code,name,category,price,stock,image,description,location) values
-('p1','ONS-001','Luna Lounge Chair','Furniture',4850,24,'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=600&q=80','A little more comfort for your everyday.','A-01'),
+('p1','ONS-001','Luna Lounge Chair','Furniture',4850,24,'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=600&q=80','A little more comfort for your everyday.','A-01'),
 ('p2','ONS-002','Arlo Table Lamp','Lighting',1890,8,'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80','A warm glow for your favorite corner.','B-04'),
 ('p3','ONS-003','Sol Ceramic Vase','Home decor',850,42,'https://images.unsplash.com/photo-1578500494198-246f612d3b3d?auto=format&fit=crop&w=600&q=80','A timeless accent, made to stand out.','C-02'),
 ('p4','ONS-004','Oak Side Table','Furniture',3290,15,'https://images.unsplash.com/photo-1499933374294-4584851497cc?auto=format&fit=crop&w=600&q=80','Thoughtfully made for the spaces you love.','A-05'),
