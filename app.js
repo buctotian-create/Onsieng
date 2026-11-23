@@ -184,8 +184,11 @@ const navIcons = {
 };
 const button = (action, content, cls = '', attrs = '') =>
   `<button type="button" class="${cls}" data-action="${action}" ${attrs}>${content}</button>`;
+// The same four-tile mark appears in the workspace and the storefront.
+const brandMark = () =>
+  `<span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>`;
 const brand = () =>
-  `<div class="brand"><div class="brand-mark"><span></span><span></span><span></span><span></span></div><div><strong>onsieng<span>.</span></strong><small>WAREHOUSE &amp; COMMERCE</small></div></div>`;
+  `<div class="brand">${brandMark()}<div><strong>onsieng<span>.</span></strong><small>WAREHOUSE &amp; COMMERCE</small></div></div>`;
 const productImage = (p) =>
   `<div class="product-image"><img src="${esc(safeUrl(p.image))}" alt="${esc(p.name)}" data-fallback="${esc(images.chair)}"></div>`;
 const badge = (s) =>
@@ -579,7 +582,7 @@ function storefront() {
     : button('account', `${icon('users', 17)} Account`, 'store-signin');
   return (
     `<div class="storefront"><div class="home-topline">A more considered home starts here.` +
-    `</div><header class="store-header"><a class="store-logo" href="#top" aria-label="Onsieng home">onsieng<span>.</span></a>` +
+    `</div><header class="store-header"><a class="store-logo" href="#top" aria-label="Onsieng home">${brandMark()}onsieng<span>.</span></a>` +
     `<nav class="store-nav" aria-label="Store navigation"><a href="#top">Home</a><a href="#collection">Shop</a><a href="#about">Our story</a><a href="#contact">Contact</a>` +
     `</nav><div class="store-actions">${!guest ? button('nav', 'My orders', 'store-orders', 'data-page="My orders"') : ''}` +
     `${button('cart', `${icon('cart', 19)} <span>${cartCount()}</span>`, 'store-cart', `aria-label="Open cart, ${cartCount()} items"`)}` +
@@ -599,7 +602,7 @@ function storefront() {
     `</section><section class="home-story" id="about"><div><span class="home-eyebrow">A LITTLE MORE ROOM TO LIVE</span>` +
     `<h2>Good things belong<br>at home.</h2></div><div><p>From your favorite chair to the finishing touches, find pieces for the moments that matter most.` +
     `</p><a href="#collection" class="home-story-link">Explore the collection ${icon('arrow', 16)}</a>` +
-    `</div></section></main><footer class="store-footer" id="contact"><div><a class="store-logo" href="#top">onsieng<span>.</span></a>` +
+    `</div></section></main><footer class="store-footer" id="contact"><div><a class="store-logo" href="#top" aria-label="Onsieng home">${brandMark()}onsieng<span>.</span></a>` +
     `<p>Good things live here.</p></div><div class="store-contact"><strong>LET'S KEEP IN TOUCH</strong>${contactLink('Facebook page', CONTACT_FACEBOOK_URL, 'facebook')}` +
     `${contactLink('Instagram page', CONTACT_INSTAGRAM_URL, 'instagram')}${contactLink('Phone number', CONTACT_PHONE, 'phone', true)}` +
     `</div><div class="store-footer-end"><span>© 2026 Onsieng</span>${!supabase ? button('switch-role', 'Explore team demo', 'store-text-link', 'data-role="admin"') : ''}` +
