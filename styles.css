@@ -4026,3 +4026,54 @@ body:has(.cart-dock) > .toast {
     font-size: 13px;
   }
 }
+
+/* Interaction feedback and the occasional storefront logo peek. */
+.store-peek {
+  position: fixed;
+  left: 18px;
+  bottom: 0;
+  z-index: 8;
+  pointer-events: none;
+  transform: translateY(110%);
+}
+.store-peek-tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px 13px;
+  border: 1px solid #edc3a7;
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+  background: #fff8f1;
+  box-shadow: 0 -5px 20px #6f34151a;
+  color: #38271f;
+  font-family: Manrope, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.store-peek-tab > span:last-child > span {
+  color: #df5b20;
+}
+.store-peek .brand-mark {
+  width: 25px;
+  height: 25px;
+  flex: none;
+}
+@keyframes logo-peek {
+  0%, 27%, 55%, 100% { transform: translateY(110%); }
+  31%, 50% { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  :is(button:not(:disabled), a[href], tr[data-action]) {
+    transition: scale 150ms ease, transform 150ms ease, background-color 150ms ease,
+      color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+  }
+  :is(button:not(:disabled), a[href], tr[data-action]):active { scale: 0.97; }
+  .store-peek { animation: logo-peek 24s ease-in-out infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .store-peek { display: none; }
+}

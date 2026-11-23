@@ -606,7 +606,7 @@ function storefront() {
     `<p>Good things live here.</p></div><div class="store-contact"><strong>LET'S KEEP IN TOUCH</strong>${contactLink('Facebook page', CONTACT_FACEBOOK_URL, 'facebook')}` +
     `${contactLink('Instagram page', CONTACT_INSTAGRAM_URL, 'instagram')}${contactLink('Phone number', CONTACT_PHONE, 'phone', true)}` +
     `</div><div class="store-footer-end"><span>© 2026 Onsieng</span>${!supabase ? button('switch-role', 'Explore team demo', 'store-text-link', 'data-role="admin"') : ''}` +
-    `</div></footer>${renderModal()}</div>`
+    `</div></footer><div class="store-peek" aria-hidden="true"><div class="store-peek-tab">${brandMark()}<span>onsieng<span>.</span></span></div></div>${renderModal()}</div>`
   );
 }
 function shop() {
@@ -1447,7 +1447,11 @@ root.addEventListener('click', async (event) => {
       case 'explore':
         document
           .querySelector('#collection')
-          ?.scrollIntoView({ behavior: 'smooth' });
+          ?.scrollIntoView({
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+              ? 'auto'
+              : 'smooth',
+          });
         break;
       case 'new-product':
         state.selected = null;
