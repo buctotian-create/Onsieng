@@ -70,9 +70,16 @@ test('checkout response from a previous account is discarded',async()=>{
  const request=a.placeOrder(details());a.state.session={user:{id:'another-account'}};a.state.orders=[];release();await assert.rejects(request,/account changed/);assert.equal(a.state.orders.length,0);
 });
 test('guest can view and add products but cannot submit an order',async()=>{
- const a=app();a.state.role='guest';a.state.page='Shop';a.render();assert.match(a.root.innerHTML,/Our collection/);cart(a);
+ const a=app();a.state.role='guest';a.state.page='Shop';a.render();assert.match(a.root.innerHTML,/Made for your home/);cart(a);
  await assert.rejects(a.placeOrder(details()),/Sign in/);assert.equal(a.state.orders.length,5);assert.equal(a.state.cart.length,1);
  const el={dataset:{action:'checkout'},disabled:false};await a.listeners.click({target:{closest:()=>el}});assert.equal(a.state.showAuth,true);assert.equal(a.state.cart.length,1);
+});
+test('category filters combine with product search and reset to all',async()=>{
+ const a=app();a.state.role='guest';a.state.page='Shop';
+ const click=async category=>a.listeners.click({target:{closest:()=>({dataset:{action:'category',category},disabled:false})}});
+ await click('Lighting');assert.match(a.root.innerHTML,/<h3>Sora Pendant Light<\/h3>/);assert.doesNotMatch(a.root.innerHTML,/<h3>Luna Lounge Chair<\/h3>/);
+ a.state.search='Sora';a.render();assert.match(a.root.innerHTML,/<h3>Sora Pendant Light<\/h3>/);assert.doesNotMatch(a.root.innerHTML,/<h3>Arlo Table Lamp<\/h3>/);
+ await click('Furniture');assert.match(a.root.innerHTML,/No products found/);a.state.search='';await click('');assert.match(a.root.innerHTML,/<h3>Luna Lounge Chair<\/h3>/);assert.match(a.root.innerHTML,/<h3>Sora Pendant Light<\/h3>/);
 });
 test('signed-in profile errors remain visible and guest cart survives retry',async()=>{
  const a=app();a.state.role='guest';cart(a);a.state.session={user:{id:'customer-one'}};a.state.profile=null;a.state.loadError='Profile unavailable';
